@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context  
+ 		http://www.springframework.org/schema/context/spring-context.xsd
+ 		http://www.springframework.org/schema/aop 
+       	http://www.springframework.org/schema/aop/spring-aop.xsd
+       	http://www.springframework.org/schema/util
+       	http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/data/jpa 
+		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+		http://www.springframework.org/schema/jdbc 
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/data/elasticsearch 
+        http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+		">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- For consider the using of annotations foe defining Spring Bean -->
+	<context:annotation-config />
+	
+	<!-- For defining Spring Bean -->
+	<context:component-scan base-package="com.krungsri.kbs"  />
+	
+	<!-- For bootstrapping the Spring Repository -->
+	<jpa:repositories base-package="com.krungsri.kbs.repository" />
+
+	<!-- Necessary to get the entity manager injected into the factory bean -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+<!-- 
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@192.168.81.91:1751:ddbcint"/>
+        <property name="username" value="BAYKBS"/>
+        <property name="password" value="by#12kbs"/>
+    </bean>	
+    
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+    </bean>
+     
+    <tx:annotation-driven />
+    
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+   
+	<bean id="branchDao" class="com.krungsri.kbs.dao.BranchDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>    
+
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="dataSource" ref="dataSource" />
+	    <property name="packagesToScan" value="com.krungsri.kbs.model" />
+	    <property name="persistenceProvider">
+	        <bean class="org.hibernate.ejb.HibernatePersistence" />
+	    </property>
+	    <property name="jpaProperties">
+	        <map>
+	            <entry key="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+	            <entry key="hibernate.hbm2ddl.auto" value="update" />
+	        </map>
+	    </property>
+	</bean>
+
+	<bean id="transactionManager" 
+          class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+-->
+	<!-- Transaction Manager 
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	 -->
+
+	<!-- Enable Transaction Manner 
+	<tx:annotation-driven transaction-manager="transactionManager" />
+  -->
+	<!-- Elasticsearch configuration -->	
+    <!-- Connecting elasticsearch by transport client -->
+    <elasticsearch:repositories base-package="com.krungsri.kbs.elasticsearch"/>
+    
+    <!-- Connecting elasticsearch by node client -->
+	<!--   -->
+	<elasticsearch:node-client id="client" local="true"/>
+        
+    <!-- Connecting elasticsearch by transport client -->
+    <!--  
+    <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300" cluster-name="elasticsearch"/>
+    -->
+    <!-- for more IP Address -->
+    <!-- 
+    <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300,someip:9300" cluster-name="elasticsearch"/>
+     -->
+   	<bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client"/>
+    </bean>
+</beans>

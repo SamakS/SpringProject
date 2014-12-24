@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:util="http://www.springframework.org/schema/util"	
+	xmlns:p="http://www.springframework.org/schema/p"	
+	xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context  
+ 		http://www.springframework.org/schema/context/spring-context.xsd
+ 		http://www.springframework.org/schema/aop 
+       	http://www.springframework.org/schema/aop/spring-aop.xsd
+       	http://www.springframework.org/schema/util
+       	http://www.springframework.org/schema/util/spring-util.xsd				
+        http://www.springframework.org/schema/data/elasticsearch 
+        http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+		">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- For consider the using of annotations foe defining Spring Bean -->
+	<context:annotation-config />
+	
+	<!-- For defining Spring Bean -->
+	<context:component-scan base-package="com.krungsri.kbs"  />
+
+	<context:property-placeholder location="classpath:kbsconfig.properties" />
+	<util:properties id="ccrpConfiguration" location="classpath:kbsconfig.properties" />
+		
+	<bean id="dataSource"
+		  class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		  p:driverClassName="${jdbc.driver.class.name}" 
+		  p:url="${jdbc.url}"
+		  p:username="${jdbc.username}" 
+		  p:password="${jdbc.password}" />		
+			
+	<!--  Elasticsearch configuration -->	
+    <!-- Connecting elasticsearch by transport client -->
+    <elasticsearch:repositories base-package="com.krungsri.kbs.resposity.elasticsearch"/>
+    
+    <!-- Connecting elasticsearch by node client -->
+	<!--  
+	<elasticsearch:node-client id="client" local="true"/>
+     -->
+    <!-- Connecting elasticsearch by transport client -->
+    <!--  -->
+    <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300" cluster-name="elasticsearch"/>
+    
+    <!-- for more IP Address -->
+    <!-- 
+    <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300,someip:9300" cluster-name="elasticsearch"/>
+     -->
+   	<bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client"/>
+    </bean>
+</beans>

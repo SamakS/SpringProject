@@ -1,0 +1,253 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body { /* 	background: url(../images/bg-repeat2.jpg) repeat-x; */
+	background-color: #66ccff;
+	font-family: tahoma;
+	font-size: 10px;
+}
+table {
+	font-family: tahoma;
+	font-size: 12px;
+}
+img {
+	border:none;
+}
+em {
+	font-family: Verdana tahoma;
+	font-size: 12px;
+	font-weight: bolder;
+	font-style: italic;
+	color: gray;
+}
+#wrapper { /* 	width: 780px; */ /*For 800*/
+	width: 100%; /*For 1024*/
+	margin: 0 auto; /*กำหนดให้วางตรงกลางหน้า เว้นด้านบนต่ำลงมา*/
+	position: relative; /*กำหนดให้สิ่งต่างๆ มี position:absolute*/
+}
+
+/****************** header**************/
+#header {
+	margin-top: -6px;
+	z-index: 100;
+	size: 120px;
+	height: 100px;
+	background: url("../images/krungsri2011.jpg") no-repeat;
+	background-color: #fec20c;
+	size: 120px;
+	position: relative;
+}
+
+/****************** header**************/
+#welcome {
+	color: white;
+	font-style: italic;
+	font-size: 25px;
+	font-family: Verdana tahoma;
+	text-align: center;
+	float: left;
+	width: 100%;
+	padding: 10px 0 0 0;
+}
+
+/****************** menu **************/
+#menu {
+	width: 300px;
+	height: 22px;
+	padding: 38px 0 0 0;
+	float:right;
+	/*border: 1px solid black;*/
+}
+
+#menu ul {
+	margin: 0;
+	/*padding: 10px 10px 0 50px;*/
+	list-style: none;
+}
+
+#menu li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#menu a {
+	float: right;
+	background: url("../images/tableftI.gif") no-repeat left top;
+	margin: 0;
+	padding: 0 0 0 5px;
+	text-decoration: none;
+}
+
+#menu a span {
+	float: left;
+	display: block;
+	background: url("../images/tabrightI.gif") no-repeat right top;
+	padding: 5px 15px 4px 6px;
+	color: #FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#menu a span {
+	float: none;
+}
+/* End IE5-Mac hack */
+#menu a:hover span {
+	color: #FFF;
+}
+
+#menu a:hover {
+	background-position: 0% -42px;
+}
+
+#menu a:hover span {
+	background-position: 100% -42px;
+}
+
+/* ######### Drop Down DIVs CSS ######### */
+.flexdropdownmenu,.flexdropdownmenu ul {
+	/*topmost and sub ULs, respectively*/
+	font: normal 12px Verdana tahoma;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	list-style-type: none;
+	background: white;
+	border: 1px solid black;
+	border-bottom-width: 0;
+	visibility: hidden;
+	display: none; /*collapse all sub menus to begin with*/
+	box-shadow: 3px 3px 8px #818181; /*shadow for CSS3 capable browsers.*/
+	-webkit-box-shadow: 3px 3px 8px #818181;
+	-moz-box-shadow: 3px 3px 8px #818181;
+}
+
+.flexdropdownmenu li {
+	position: relative;
+}
+
+.flexdropdownmenu li a {
+	display: block;
+	width: 170px; /*width of menu (not including side paddings)*/
+	color: black;
+	background: #fae7a9;
+	border-bottom: 1px solid black;
+	text-decoration: none;
+	padding: 4px 5px;
+}
+
+* html .flexdropdownmenu li { /*IE6 CSS hack*/
+	display: inline-block;
+	width: 170px; /*width of menu (include side paddings of LI A*/
+}
+
+.flexdropdownmenu li a:hover,.flexdropdownmenu li.selected>a {
+	background: #F0CE7D;
+}
+.rightarrowclass {
+	position: absolute;
+	top: 6px;
+	right: 5px;
+}
+
+/****************** content **************/
+#content { /* 	width: 775px; */ /*For 800*/
+	width: 98%; /*For 1024*/
+	height: 100%;
+	margin: 0 auto; /*เธ�เธณเธซเธ�เธ”เน�เธซเน�เธงเธฒเธ�เธ•เธฃเธ�เธ�เธฅเธฒเธ�เธซเธ�เน�เธฒ เน€เธงเน�เธ�เธ”เน�เธฒเธ�เธ�เธ�เธ•เน�เธณเธฅเธ�เธกเธฒ*/
+	padding: 10px;
+	background-color: #66ccff;	
+}
+
+.clear {
+	clear: both;
+	height: 2px;
+}
+
+/****************** footer **************/
+#footer {
+	size: 80px;
+	padding-top: 10px;
+}
+
+#footertext { /* 	width: 775px; */ /*For 800*/
+	width: 950px; /*For 1024*/
+	height: 25px;
+	margin: 0 auto 15px; /*เธ�เธณเธซเธ�เธ”เน�เธซเน�เธงเธฒเธ�เธ•เธฃเธ�เธ�เธฅเธฒเธ�เธซเธ�เน�เธฒ เน€เธงเน�เธ�เธ”เน�เธฒเธ�เธ�เธ�เธ•เน�เธณเธฅเธ�เธกเธฒ*/
+	text-align: center;
+	font-family: Verdana tahoma;
+	font-size: 12px;
+	/* 	background-color: #fec20c; */
+}
+
+/**************Edit Page ****************/
+input[type=text] {
+	border: 1px solid #99bbe8;
+}
+
+textarea {
+	border: 1px solid #99bbe8;
+}
+
+.inputform { /* For Support IE6 */
+	border: 1px solid #99bbe8;
+}
+
+table.ccrpEdit-DefaultPanel {
+	width: 100%;
+}
+
+table.ccrpEdit-SubPanel {
+	width: 100%;
+	border: 1px solid #99bbe8;
+}
+
+select {
+	border: 1px solid #99bbe8;
+}
+
+td.ccrpEdit-CommonCaption {
+	width: 20%;
+	text-align: right;
+}
+
+td.ccrpEdit-CommonValue {
+	width: 30%;
+	text-align: left;
+}
+
+input.readonly {
+	border: none;
+}
+
+td.solution-history {
+/* 	background-color: #a9cbf8; */
+	background-color: #66ccff;
+	color: red;
+}
+#fm {
+	margin: 0;
+	padding: 0px 0px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	color: #666;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 160px;
+	text-align: right;
+}
